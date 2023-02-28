@@ -22,6 +22,3 @@ def calculation(a, b, operation):
         case _:
             print("Wrong operation!")
             return None
-
-
-print("Result: {}".format(calculation(input(), input(), input())))
