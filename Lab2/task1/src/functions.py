@@ -1,11 +1,12 @@
 import re
 
-from constants import SENTENCE_PATTERN, NON_DECLARATIVE_PATTERN, WORD_PATTERN, NUMBER_PATTERN, ONE_WORD_ABBREVIATIONS, \
-    TWO_WORDS_ABBREVIATIONS, THREE_WORDS_ABBREVIATIONS
+from .constants import SENTENCE_PATTERN, NON_DECLARATIVE_PATTERN, WORD_PATTERN, NUMBER_PATTERN, \
+    ONE_WORD_ABBREVIATIONS, TWO_WORDS_ABBREVIATIONS, THREE_WORDS_ABBREVIATIONS
 
 
 def count_sentences(text: str):
-    amount = len(re.findall(SENTENCE_PATTERN, text))
+    new_text = re.sub(SENTENCE_PATTERN, r"||", text)
+    amount = len(new_text.split("||"))
 
     for abbreviation in ONE_WORD_ABBREVIATIONS:
         amount -= text.lower().count(abbreviation)
@@ -20,6 +21,7 @@ def count_sentences(text: str):
 
 
 def count_non_declarative(text: str):
+    text = text + "\0"
     return len(re.findall(NON_DECLARATIVE_PATTERN, text))
 
 
@@ -37,17 +39,14 @@ def calc_average_word_length(text: str):
 
 def calculate_top_k_repeated_n_grams(text: str, k: int = 10, n: int = 4):
     words = re.findall(WORD_PATTERN, text)
-
-    if n > len(words):
-        return f'n ({n}) is bigger than amount of words ({len(words)}) in this text!'
-
+    ngrams = [text[i:i + n] for i in range(len(text) - n + 1)]
     dictionary = {}
-    for i in range(len(words) - n + 1):
-        n_gram = ' '.join([str(word) for word in words[i:i+n]])
-        if n_gram not in dictionary:
-            dictionary[n_gram] = 1
+
+    for ngram in ngrams:
+        if ngram not in dictionary:
+            dictionary[ngram] = 1
         else:
-            dictionary[n_gram] += 1
+            dictionary[ngram] += 1
 
     if len(dictionary) <= k:
         return sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
