@@ -71,6 +71,7 @@ class UniqueContainer:
             print(f'Cannot load {filename}: file not found.')
 
     def switch(self, username):
+        self.current_container = set()
         if username in self.users:
             choice = input(f'Welcome back, {username}!\nDo you want to load your saved container? (yes/no): ')
 
