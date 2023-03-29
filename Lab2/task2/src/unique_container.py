@@ -59,8 +59,11 @@ class UniqueContainer:
             json.dump(list(self.current_container), f)
         print('Container has been saved.')
 
-    def load(self):
-        filename = f'users/{self.current_user}.json'
+    def load(self, file=None):
+        if file is None:
+            filename = f'users/{self.current_user}.json'
+        else:
+            filename = f'users/{file}'
         try:
             with open(filename, 'r') as f:
                 elements_list = json.load(f)
@@ -72,7 +75,11 @@ class UniqueContainer:
 
     def switch(self, username):
         self.current_container = set()
-        if username in self.users:
+
+        try:
+            filename = f'users/{username}.json'
+            open(filename, 'r')
+            self.current_user = username
             choice = input(f'Welcome back, {username}!\nDo you want to load your saved container? (yes/no): ')
 
             while choice != 'yes' and choice != 'no':
@@ -83,16 +90,22 @@ class UniqueContainer:
                 self.load()
             else:
                 self.current_container = set()
+        except FileNotFoundError:
+            choice = input(f'Hello, {username}!\nDo you want to load container from file? (yes/no): ')
 
-        else:
-            filename = f'users/{username}.json'
-            try:
-                open(filename, 'r')
-                self.current_user = username
-                self.users[self.current_user] = self.current_container
-                self.switch(username)
-            except FileNotFoundError:
-                print(f'Hello, {username}. Creating a new container.')
+            while choice != 'yes' and choice != 'no':
+                choice = input('Incorrect input! Type \'yes\' or \'no\': ')
+
+            if choice == 'yes':
+                file = input("Input file name (it should be in the users directory): ")
+                filename = str(file)
+                try:
+                    open(filename, 'r')
+                    self.current_user = username
+                    self.users[self.current_user] = self.current_container
+                except FileNotFoundError:
+                    print(f'Hello, {username}. Creating a new container.')
+                    self.current_container = set()
+                self.load(file=filename)
+            else:
                 self.current_container = set()
-
-        self.current_user = username
