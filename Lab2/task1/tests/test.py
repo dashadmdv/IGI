@@ -33,11 +33,30 @@ class TestCountSentences(unittest.TestCase):
                                          'you) the same basic questions.')
         self.assertEqual(returned_value, expected_value)
 
+    def test_7(self):
+        expected_value = 2
+        returned_value = count_sentences('Hello v.i.p. client. Nice to meet you mr. Perez.')
+        self.assertEqual(returned_value, expected_value)
+
     def test_6(self):
         expected_value = 2
         returned_value = count_sentences('Wtf?! I don\'t want know what u feeling.')
         self.assertEqual(returned_value, expected_value)
 
+    def test_8(self):
+        expected_value = 1
+        returned_value = count_sentences('He said: "Hello. How are you?"')
+        self.assertEqual(returned_value, expected_value)
+
+    def test_9(self):
+        expected_value = 1
+        returned_value = count_sentences('Mr.Garcia is here !?')
+        self.assertEqual(returned_value, expected_value)
+
+    def test_10(self):
+        expected_value = 1
+        returned_value = count_sentences('He said: "Hello, what\'s up?"')
+        self.assertEqual(returned_value, expected_value)
 
 class TestAverageLengthOfWords(unittest.TestCase):
     def test_1(self):
