@@ -5,8 +5,7 @@ from .constants import SENTENCE_PATTERN, NON_DECLARATIVE_PATTERN, WORD_PATTERN, 
 
 
 def count_sentences(text: str):
-    new_text = re.sub(SENTENCE_PATTERN, r"||", text)
-    amount = len(new_text.split("||"))
+    amount = len(re.findall(SENTENCE_PATTERN, text))
 
     for abbreviation in ONE_WORD_ABBREVIATIONS:
         amount -= text.lower().count(abbreviation)
@@ -17,12 +16,22 @@ def count_sentences(text: str):
     for abbreviation in THREE_WORDS_ABBREVIATIONS:
         amount -= text.lower().count(abbreviation) * 3
 
+    reg = r"[\"]([^\"]+)[\"]"
+    direct_speeches = re.findall(reg, text)
+    for direct_speech in direct_speeches:
+        amount -= count_sentences(direct_speech)
+
     return amount if amount >= 0 else 0
 
 
 def count_non_declarative(text: str):
     text = text + "\0"
-    return len(re.findall(NON_DECLARATIVE_PATTERN, text))
+    amount = len(re.findall(NON_DECLARATIVE_PATTERN, text))
+    reg = r"[\"]([^\"]+)[\"]"
+    direct_speeches = re.findall(reg, text)
+    for direct_speech in direct_speeches:
+        amount -= count_sentences(direct_speech)
+    return amount
 
 
 def calc_average_sentence_length(text: str):
