@@ -9,6 +9,7 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
     print('Help :(')
     print('sos')
+    print('sorry didn\'t have time to commit normally')
 
 
 # Press the green button in the gutter to run the script.
