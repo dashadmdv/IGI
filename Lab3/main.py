@@ -10,6 +10,8 @@ def print_hi(name):
     print('Help :(')
     print('sos')
     print('sorry didn\'t have time to commit normally')
+    print('commit')
+
 
 
 # Press the green button in the gutter to run the script.
