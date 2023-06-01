@@ -11,7 +11,7 @@ def print_hi(name):
     print('sos')
     print('sorry didn\'t have time to commit normally')
     print('commit')
-
+    print('hola amigos')
 
 
 # Press the green button in the gutter to run the script.
