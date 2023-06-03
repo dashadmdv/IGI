@@ -83,6 +83,17 @@ class TestInherited(unittest.TestCase):
         self.assertEqual(result, result_to_test)
 
 
+class TestMRO(unittest.TestCase):
+    def test_mro(self):
+        encoded = Encoder.encode(ClassC)
+        decoded = Decoder.decode(encoded)
+
+        result = str(ClassC.__mro__)
+        result_to_test = str(decoded.__mro__)
+
+        self.assertEqual(result, result_to_test)
+
+
 class TestObjects(unittest.TestCase):
     def test_object(self):
         encoded = Encoder.encode(ClassC())
@@ -97,6 +108,28 @@ class TestObjects(unittest.TestCase):
         result_to_test = decoded.method_b()
 
         self.assertEqual(result, result_to_test)
+
+
+class Meta(type):
+    def __init__(cls, name, bases, namespaces):
+        super(Meta, cls).__init__(name, bases, namespaces)
+
+    def __call__(cls):
+        new_instance = super(Meta, cls).__call__()
+        return new_instance
+
+
+class ClassWithMeta(metaclass=Meta):
+    a = 1
+
+
+class TestClassWithMeta(unittest.TestCase):
+    def test_class_with_meta_class(self):
+        encoded = Encoder.encode(ClassWithMeta)
+        decoded = Decoder.decode(encoded)
+        result = ClassWithMeta().a
+        test_result = decoded().a
+        self.assertEqual(result, test_result)
 
 
 if __name__ == '__main__':
