@@ -14,7 +14,7 @@ def order_create(request):
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
                                          price=item['price'],
-                                         time=item['time'])
+                                         time=item['quantity'])
             # очистка корзины
             cart.clear()
             return render(request, 'orders/order/created.html',
