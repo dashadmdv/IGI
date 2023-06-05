@@ -13,7 +13,17 @@
 </div>
 <div id="subheader">
     <div class="cart">
-        Your appointments.
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            Your appointments:
+            <a href="{% url 'cart:cart_detail' %}">
+                {{ total_items }} doctor{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+            </a>
+        {% else %}
+            Your cart is empty.
+        {% endif %}
+    {% endwith %}
     </div>
 </div>
 <div id="content">
