@@ -1,0 +1,24 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Medical center{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/list.css' %}" rel="stylesheet">
+    <link href="{% static 'css/detail.css' %}" rel="stylesheet">
+</head>
+<body background="static/images/1675194819_bogatyr-club-p-meditsinskii-fon-dlya-prezentatsii-fon-2.jpg">
+<div id="header">
+    <a href="/" class="logo">Medical center</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        Your appointments.
+    </div>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
