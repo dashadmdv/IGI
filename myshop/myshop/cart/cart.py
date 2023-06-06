@@ -24,7 +24,6 @@ class Cart(object):
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': quantity,
                                      'price': str(product.price)}
-        print(quantity)
         if update_quantity:
             pass
         self.save()
@@ -55,7 +54,6 @@ class Cart(object):
             self.cart[str(product.id)]['product'] = product
 
         for item in self.cart.values():
-            print(item)
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price']
             try:
@@ -65,9 +63,6 @@ class Cart(object):
             yield item
 
     def __len__(self):
-        """
-        Подсчет всех записей в корзине.
-        """
         return len(self.cart.values())
 
     def get_total_price(self):

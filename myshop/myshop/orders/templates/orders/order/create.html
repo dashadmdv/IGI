@@ -1,11 +1,14 @@
 {% extends "shop/base.html" %}
+{% load static%}
 
-{% block title %}Checkout{% endblock %}
+{% block title %}Reservation{% endblock %}
 
 {% block content %}
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
+
     <h1>Buy</h1>
     <div class="order-info">
-        <h3>Your order</h3>
+        <h3>Your appointments</h3>
         <ul>
             {% for item in cart %}
                 <li>

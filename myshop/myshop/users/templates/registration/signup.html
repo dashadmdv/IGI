@@ -1,9 +1,8 @@
-<!--/templates/register.html-->
-
 {% load static %}
 {% block content %}
     <head>
         <meta charset="utf-8" />
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <div class="registration-wrapper">
 
@@ -38,7 +37,16 @@
                     {% endfor %}
                 </div>
              {% endif %}
-
+            {% csrf_token %}
+            <div class="registration_email">Input user email
+                <p><input type="email"></p></div>
+            {% csrf_token %}
+            <div class="registration_first">Input your first name
+                <p><input type="text"></p></div>
+            <div class="registration_last">Input your last name
+                <p><input type="text"></p></div>
+            <div class="registration_address">Input your address
+                <p><input type="text"></p></div>
             <input class="submit" type="submit" value="Sign up">
         </form>
 

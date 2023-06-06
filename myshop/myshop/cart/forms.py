@@ -1,7 +1,7 @@
 from django import forms
 
-round_times = [(i*100, str(i) + ':00') for i in range(10, 19)]
-half_times = [(i*100 + 30, str(i) + ':30') for i in range(10, 19)]
+round_times = [(str(i) + ':00', str(i) + ':00') for i in range(10, 19)]
+half_times = [(str(i) + ':30', str(i) + ':30') for i in range(10, 19)]
 APPT_TIME_CHOICES = []
 for i in range(9):
     APPT_TIME_CHOICES.append(round_times[i])

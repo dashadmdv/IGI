@@ -7,7 +7,7 @@
     <link href="{% static 'css/list.css' %}" rel="stylesheet">
     <link href="{% static 'css/detail.css' %}" rel="stylesheet">
 </head>
-<body background="static/images/1675194819_bogatyr-club-p-meditsinskii-fon-dlya-prezentatsii-fon-2.jpg">
+<body>
 <div id="header">
     <a href="/" class="logo">Medical center</a>
 </div>
@@ -21,7 +21,7 @@
                 ${{ cart.get_total_price }}
             </a>
         {% else %}
-            Your cart is empty.
+            You don't have appointments yet.
         {% endif %}
     {% endwith %}
     </div>
@@ -30,7 +30,6 @@
         <a class="log_link" href="/accounts/logout/">Log out</a>
       {% else %}
         <a class="log_link" href="/accounts/login/">Log in</a>
-        <a class="log_link" href="/accounts/signup/">Sign Up</a>
     {% endif %}
     </div>
 </div>
