@@ -14,11 +14,14 @@
 #subheader {
   background-color: #e0e0e0;
   padding: 10px;
-  color: black; /* Set text color to black */
+  color: black;
+  display: inline-flex;
+  width: 97.96%;
 }
 
 #subheader .cart {
   font-size: 16px;
+  float: left;
 }
 
 /* Стили для контента */
@@ -26,13 +29,17 @@
   padding: 20px;
 }
 
-/* Стили для изображения */
 .resized-image {
-  max-width: 200px; /* Измените нужную ширину */
-  max-height: 200px; /* Измените нужную высоту */
+  max-width: 500px;
+  max-height: 500px;
 }
 
 img {
     width: 400px;
     height: 400px;
+}
+
+.auth {
+    margin-left: 0;
+    margin-right: auto;
 }

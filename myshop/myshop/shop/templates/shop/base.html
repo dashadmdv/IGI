@@ -25,6 +25,14 @@
         {% endif %}
     {% endwith %}
     </div>
+    <div class="auth">
+              {% if user.is_authenticated %}
+        <a class="log_link" href="/accounts/logout/">Log out</a>
+      {% else %}
+        <a class="log_link" href="/accounts/login/">Log in</a>
+        <a class="log_link" href="/accounts/signup/">Sign Up</a>
+    {% endif %}
+    </div>
 </div>
 <div id="content">
     {% block content %}
